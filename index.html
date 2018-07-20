@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Plates API</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/app.js" charset="utf-8"></script>
+  </head>
+  <body ng-app="plates-api-app" ng-controller="mainController" ng-cloak>
+
+    <div class="container">
+      <p></p>
+      <div class="">
+        <img src="./img/logo_large.jpg" alt="www.APNAPLATES.com" style="width: 20%">
+      </div>
+      <!-- <label>Search: <input ng-model="searchText"></label> -->
+
+      <md-input-container>
+        <label>Search:</label>
+        <input type="text"
+               class="search-input"
+               ng-model="searchText"
+               name="Search"
+               placeholder="Enter your name, initials anything...">
+      </md-input-container>
+
+      <div>Total Plates: {{total}}</div>
+      <div>Filtered Plates: {{query.length}}</div>
+
+      <hr>
+      <div>
+        <md-button type="md-button"
+                 class="md-raised md-primary"
+                 ng-click="searchText = ''">
+                 ALL
+        </md-button>
+        <md-button type="md-button"
+                 class="md-raised md-warn"
+                 ng-click="searchText = 'SINGH'">
+                 SINGH
+        </md-button>
+        <md-button type="md-button"
+                 class="md-raised md-warn"
+                 ng-click="searchText = 'KRISHNA'">
+                 KRISHNA
+        </md-button>
+        <md-button type="md-button"
+                 class="md-raised md-warn"
+                 ng-click="searchText = 'MOH'">
+                 MOHAMMED
+        </md-button>
+        <md-button type="md-button"
+                 class="md-raised md-warn"
+                 ng-click="searchText = 'JAG'">
+                 JAG
+        </md-button>
+        <md-button type="md-button"
+                 class="md-raised md-warn"
+                 ng-click="searchText = 'KHAN'">
+                 KHAN
+        </md-button>
+        <md-button type="md-button"
+                 class="md-raised md-warn"
+                 ng-click="searchText = 'FAI'">
+                 FAISAL
+        </md-button>
+        <md-button type="md-button"
+                 class="md-raised md-warn"
+                 ng-click="searchText.sold = 'Yes'">
+                 SHOW SOLD PLATES
+        </md-button>
+        <md-button type="md-button"
+                 class="md-raised md-warn"
+                 ng-click="searchText.status = 'Disable'">
+                 SHOW DISABLED PLATES
+        </md-button>
+      </div>
+
+      <hr>
+
+      <div>Total Views: {{totalViews | number}}</div>
+      <div>Average view for each plate: {{viewsPerPlate | number: 0}}</div>
+      <div>Total sellers contacted: {{totalSellerContacted | number: 0}}</div>
+      <div>Marked as SOLD: {{soldPlatesTotal | number}}</div>
+
+      <hr>
+
+      <div>
+
+      </div>
+
+      <hr>
+
+      <div ng-hide="loaded">Loading the plates...</div>
+
+      <div id="searchTextResults" ng-show="loaded">
+
+        <div class="plate-container">
+
+          <!-- <div ng-repeat="plate in plates | orderBy:'+':true | filter:searchText as query">
+            <div class="plate-tile">
+              <p></p>
+              <div class=""><img ng-src="http://www.apnaplates.com/plates/smallimg/{{plate.small_image}}"></div>
+              <div class=""><small>{{ plate.meaning | limitTo: 15 }}{{plate.meaning.length > 15 ? '...' : ''}}</small></div>
+              <div class=""><small>{{plate.asking_price | currency:"£":0}}</small></div>
+              <div class=""><small>Views: {{plate.page_views}}</small></div>
+              <div class=""><small>ESTF: {{plate.emailtofriend}}</small></div>
+              <div class=""><small>Seller Contacted: {{plate.sellercontacted}}</small></div>
+              <div class="">
+                <small>Plate Created:</small><br>
+                <small>{{plate.created_date | date:'yyyy/mm/dd'}}</small>
+              </div>
+
+              <div class=""><small>Status: {{plate.status}}</small></div>
+              <div class="">
+                <small ng-if="plate.sold === 'Yes'" class="sold">Available: Sold</small>
+                <small ng-if="plate.sold !== 'Yes'">Available: Yes</small>
+              </div>
+              <div class=""><small><a ng-href="{{plate.url}}" target="_blank">VIEW</a></small></div>
+            </div>
+            <p></p>
+          </div> -->
+
+            <md-content class="md-padding" layout-sm="column" layout="row">
+              <div class="plate-container">
+                <md-card class="" ng-repeat="plate in plates | orderBy:'+':true | filter:searchText as query">
+                  <!--<md-card-title-media class="card-media" layout="row" layout-align="space-around center">-->
+                      <!-- <img ng-src="http://www.apnaplates.com/plates/smallimg/{{plate.small_image}}"> -->
+                      <div class="numberplate2">{{plate.plate_id | uppercase}}</div>
+                  <!--</md-card-title-media>-->
+                  <!--<md-card-title>-->
+                    <!--<md-card-title-text layout="column" layout-align="center center">-->
+                      <!--<div class="md-headline">{{plate.plate_id | uppercase}}</div>-->
+                      <!--&lt;!&ndash; <span class="md-subhead">{{ plate.meaning | limitTo: 15 }}{{plate.meaning.length > 15 ? '...' : ''}}</span> &ndash;&gt;-->
+                      <!--<div class=""><small>{{plate.asking_price | currency:"£":0}}</small></div>-->
+                    <!--</md-card-title-text>-->
+                  <!--</md-card-title>-->
+                  <!-- <md-card-content>
+
+
+                    <div class=""><small>Views: {{plate.page_views}}</small></div>
+                    <div class=""><small>ESTF: {{plate.emailtofriend}}</small></div>
+
+                    <div class=""><small>Seller Contacted: {{plate.sellercontacted}}</small></div>
+                    <div class="">
+                      <small>Plate Created:</small><br>
+                      <small>{{plate.created_date | date:'yyyy/mm/dd'}}</small>
+                    </div>
+
+                    <div class=""><small>Status: {{plate.status}}</small></div>
+                    <div class="">
+                      <small ng-if="plate.sold === 'Yes'" class="sold">Available: Sold</small>
+                      <small ng-if="plate.sold !== 'Yes'">Available: Yes</small>
+                    </div>
+
+                  </md-card-content> -->
+                  <!--<md-card-actions layout="row" layout-align="space-around center">-->
+                    <!--<md-button class="md-raised md-primary" ng-href="{{plate.url}}" target="_blank">View</md-button>-->
+                  <!--</md-card-actions>-->
+                </md-card>
+              </div>
+            </md-content>
+          </div>
+      </div>
+    </div>
+
+    <!-- not used anymore for now
+    <small>Available: {{plate.sold}}</small>
+    <div class=""><small>Plate Created2: {{plate.date_created}}</small></div>
+    <div class="numberplate2">{{plate.plate_id | uppercase}}</div>
+    -->
+
+
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-messages.min.js"></script>
+
+    <!-- Angular Material Library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+  </body>
+</html>

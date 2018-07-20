@@ -18,6 +18,16 @@ app.controller("mainController", ['$scope', '$timeout', '$http', function($scope
       $scope.soldPlatesTotal = 0;
       $scope.viewsPerPlate = 0;
       $scope.totalSellerContacted = 0;
+      $scope.searchFilter = [
+          {id: 1, name: 'All'},
+          {id: 2, name: 'Singh'},
+          {id: 3, name: 'Krishna'},
+          {id: 4, name: 'Jag'},
+          {id: 4, name: 'Faisal'},
+          {id: 4, name: 'Khan'},
+          {id: 4, name: 'Sold Plates'},
+          {id: 4, name: 'Disabled Plates'}
+      ]
       // this callback will be called asynchronously
       // when the response is available
 

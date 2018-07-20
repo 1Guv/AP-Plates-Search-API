@@ -35,35 +35,19 @@
 
       <hr>
       <div>
+        <md-input-container>
+          <label>Search Filter</label>
+          <md-select ng-model="searchText">
+            <md-option ng-value="filter.name" ng-repeat="filter in searchFilter">{{ filter.name }}</md-option>
+          </md-select>
+        </md-input-container>
+
+        <br>
+
         <md-button type="md-button"
                  class="md-raised md-primary"
                  ng-click="searchText = ''">
                  ALL
-        </md-button>
-        <md-button type="md-button"
-                 class="md-raised md-warn"
-                 ng-click="searchText = 'SINGH'">
-                 SINGH
-        </md-button>
-        <md-button type="md-button"
-                 class="md-raised md-warn"
-                 ng-click="searchText = 'KRISHNA'">
-                 KRISHNA
-        </md-button>
-        <md-button type="md-button"
-                 class="md-raised md-warn"
-                 ng-click="searchText = 'MOH'">
-                 MOHAMMED
-        </md-button>
-        <md-button type="md-button"
-                 class="md-raised md-warn"
-                 ng-click="searchText = 'JAG'">
-                 JAG
-        </md-button>
-        <md-button type="md-button"
-                 class="md-raised md-warn"
-                 ng-click="searchText = 'KHAN'">
-                 KHAN
         </md-button>
         <md-button type="md-button"
                  class="md-raised md-warn"

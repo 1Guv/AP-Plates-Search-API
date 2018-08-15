@@ -1,6 +1,6 @@
 console.log('Yo');
 
-var app = angular.module('plates-api-app', ['ngMaterial', 'ngMessages']);
+var app = angular.module('plates-api-app', ['ngMaterial', 'ngMessages', 'ngMdBadge']);
 app.controller("mainController", ['$scope', '$timeout', '$http', function($scope, $timeout, $http){
 
   $scope.loaded = false;
@@ -19,14 +19,14 @@ app.controller("mainController", ['$scope', '$timeout', '$http', function($scope
       $scope.viewsPerPlate = 0;
       $scope.totalSellerContacted = 0;
       $scope.searchFilter = [
-          {id: 1, name: 'All'},
-          {id: 2, name: 'Singh'},
-          {id: 3, name: 'Krishna'},
-          {id: 4, name: 'Jag'},
-          {id: 4, name: 'Faisal'},
-          {id: 4, name: 'Khan'},
-          {id: 4, name: 'Sold Plates'},
-          {id: 4, name: 'Disabled Plates'}
+          {id: 1, name: 'All', value: 'All'},
+          {id: 2, name: 'Singh', value: 'Singh'},
+          {id: 3, name: 'Krishna', value: 'Krishna'},
+          {id: 4, name: 'Jag', value: 'Jag'},
+          {id: 4, name: 'Faisal', value: 'Faisal'},
+          {id: 4, name: 'Khan', value: 'Khan'},
+          // {id: 4, name: 'Sold Plates', value: 'Yes'},
+          // {id: 4, name: 'Disabled Plates', value: 'Disable'}
       ]
       // this callback will be called asynchronously
       // when the response is available
@@ -43,8 +43,8 @@ app.controller("mainController", ['$scope', '$timeout', '$http', function($scope
       for (var i=0; i<$scope.total; i++) {
 
         // Getting TOTAL VIEWS
-        let views = $scope.plates[i].page_views;
-        let viewsToInteger = parseInt(views);
+        var views = $scope.plates[i].page_views;
+        var viewsToInteger = parseInt(views);
         $scope.totalViews += viewsToInteger;
         //
 
@@ -54,8 +54,8 @@ app.controller("mainController", ['$scope', '$timeout', '$http', function($scope
         }
 
         // Get the total sellers that have been Contacted
-        let contact = $scope.plates[i].sellercontacted;
-        let contactToInteger = parseInt(contact);
+        var contact = $scope.plates[i].sellercontacted;
+        var contactToInteger = parseInt(contact);
         $scope.totalSellerContacted += contactToInteger;
 
       }

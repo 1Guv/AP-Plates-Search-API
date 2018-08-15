@@ -82,7 +82,7 @@
 }
 
 md-input-container {
-  width: 500px;
+  width: 300px;
 }
 
 md-card-title {
@@ -101,4 +101,12 @@ md-card-title {
   width: auto;
   padding: 20px 0px;
   background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+}
+
+.width {
+    width: 100px;
+}
+
+.search-input {
+
 }
